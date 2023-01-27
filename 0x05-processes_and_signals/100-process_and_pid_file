@@ -1,11 +1,27 @@
 #!/usr/bin/env bash
-# Process and PID file
-fpath="/var/run/holbertonscript.pid"
-echo $$ > /var/run/holbertonscript.pid
-    trap 'echo "I hate the kill command"; rm -rf $fpath; exit 0' SIGTERM
-    trap 'echo "Y U no love me?!"' SIGINT
-    trap 'rm -rf $fpath; exit 0' SIGQUIT
-while true; do
-    echo "To infinity and beyond"
-    sleep 2
-done
+# This script is managing manage_my_process.
+
+start() {
+	./manage_my_process &
+	echo $$ >/var/run/my_process.pid
+	if [ "$1" -eq 1 ]; then echo "manage_my_process started"; fi
+}
+
+stop() {
+	kill "$(pgrep -f './manage_my_process')"
+	rm -f /var/run/my_process.pid
+	if [ "$1" -eq 1 ]; then echo "manage_my_process stopped"; fi
+}
+
+restart() {
+	stop 0
+	start 0
+	echo "manage_my_process restarted"
+}
+
+case "$1" in
+start) start 1 ;;
+stop) stop 1 ;;
+restart) restart ;;
+*) echo "Usage: manage_my_process {start|stop|restart}" ;;
+esac
