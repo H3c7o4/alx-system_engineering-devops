@@ -4,6 +4,8 @@
 apt update -y && apt upgrade -y
 apt install nginx -y
 
-echo "Hello World!" >/var/www/html/index.nginx-debian.html
+# Modify the default Nginx configuration file to include the "Hello World!" message
+echo "Hello World!" | sudo tee /var/www/html/index.html > /dev/null
 
-service nginx restart
+# Test the Nginx configuration and reload the service
+nginx -t && sudo /etc/init.d/nginx reload
