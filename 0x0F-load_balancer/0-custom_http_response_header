@@ -1,22 +1,10 @@
 #!/usr/bin/env bash
 # Bash script that setup a nginx web server on our server, redirection, 404, header
 
-apt update -y && apt upgrade -y
-apt install nginx -y
-sudo ufw allow 'Nginx HTTP'
+sudo apt-get -y update
+sudo apt-get -y install nginx
 
-# Index page
-echo "Hello World!" | sudo tee /var/www/html/index.nginx-debian.html
-
-# Redirect to a wonderful Nyan Cat page
-sudo sed -i 's/server_name _;/server_name _;\n\trewrite ^/redirect_me https://www.youtube.com/watch?v=QH2-TGUlwu4 permanent;/' /etc/nginx/sites-available/default
-
-# 404 Page not found
-echo "Ceci n'est pas une pagee" | sudo tee /usr/share/nginx/html/custom_404.html
-sudo sed -i '/server_name _;/a error_page 404 /custom_404.html;\nlocation = /custom_404.html {\nroot /usr/share/nginx/html;\ninternal;\n}' /etc/nginx/sites-available/default
-
-# Served header
-sudo sed -i "/404 \/404.html;$/a\        add_header X-Served-By $(hostname);" /etc/nginx/sites-available/default
+repl_str="\tlocation \/ {\n\t\tadd_header X-Served-By $HOSTNAME;"
+sudo sed -i "s/\tlocation \/ {/$repl_str/" /etc/nginx/sites-available/default
 
 sudo service nginx restart
-sudo service nginx reload
