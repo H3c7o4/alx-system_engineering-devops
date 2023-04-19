@@ -7,3 +7,6 @@ This repository is created for System engineering and DevOps concepts.
  - Load balancer
  - SSH
  - SSL
+ - Firewall
+ - DataBase Replication
+ - MySQL
