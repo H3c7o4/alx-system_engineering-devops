@@ -2,6 +2,7 @@
 
 This repository is created for System engineering and DevOps concepts.
 
+ - Deployment
  - CI/CD
  - Web Servers
  - Load balancer
