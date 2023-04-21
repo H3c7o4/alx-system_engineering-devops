@@ -10,3 +10,4 @@ This repository is created for System engineering and DevOps concepts.
  - Firewall
  - DataBase Replication
  - MySQL
+ - Application servers
