@@ -3,17 +3,28 @@
 Python script that, using this REST API, for a given employee ID,
 returns information about his/her TODO list progress.
 """
-import json
-from sys import argv
+import sys
 import requests
 
 if __name__ == "__main__":
-    r = requests.get('https://jsonplaceholder.typicode.com/todos/')
-    json = r.json()
-    dico = json.load(json)
-    print('Employee {} is done with tasks({}/{}):\n'.format(
-          dico.get('EMPLOYEE_NAME'), dico.get('NUMBER_OF_DONE_TASKS'),
-          dico.get('TOTAL_NUMBER_OF_TASKS')))
-    
-    for i in range(int(dico.get('NUMBER_OF_DONE_TASKS'))):
-        print("\t" + dico.get(TASK_TITLE))
+    _id = sys.argv[1]
+    usr_url = "https://jsonplaceholder.typicode.com/users/{}".format(_id)
+    todos_url = "https://jsonplaceholder.typicode.com/users/{}/todos".format(_id)
+
+    user = requests.get(usr_url).json()
+    todos = requests.get(todos_url).json()
+
+    completed = 0
+    total = 0
+    completed_tasks = []
+
+    for task in todos:
+        total += 1
+        if task.get("completed") is True:
+            completed += 1
+            completed_tasks.append(task.get("title"))
+
+    sentence = "Employee {} is done with tasks({}/{}):"
+    print(sentence.format(user.get("name"), completed, total))
+    for task in completed_tasks:
+        print("\t {}".format(task))
