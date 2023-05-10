@@ -1,5 +1,6 @@
 #!/usr/bin/python3
 """
+  API querying
 """
 import requests
 
