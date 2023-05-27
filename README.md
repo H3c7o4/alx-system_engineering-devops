@@ -12,4 +12,5 @@ This repository is created for System engineering and DevOps concepts.
  - DataBase Replication
  - MySQL
  - Application servers
+ - Server monitor (Datadog)
  - Networks / security
