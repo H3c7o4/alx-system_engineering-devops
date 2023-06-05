@@ -1,5 +1,5 @@
 # 0x07. Networking basics #0
-<i>DevOps  Network </i>
+<i>DevOps & Network </i>
 
 # OSI Model
 
