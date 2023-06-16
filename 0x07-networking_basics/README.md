@@ -14,8 +14,8 @@
 
 # What is a WAN
 
- - Typical usage
- - Typical geographical size
+ - Typical usage ?
+ - Typical geographical size ?
 
 # What is the Internet
 
